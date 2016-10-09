@@ -5,53 +5,28 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.net.ftp.FTPClient;
 
 import java.io.*;
+import ru.sbt.bit.ood.hw1.download.Downloader;
+import ru.sbt.bit.ood.hw1.download.FTPDownloader;
+import ru.sbt.bit.ood.hw1.parse.CSVRecordParser;
+import ru.sbt.bit.ood.hw1.parse.Parser;
+import ru.sbt.bit.ood.hw1.update.Updater;
+import ru.sbt.bit.ood.hw1.update.UpdaterImpl;
 
 public class TradesJob {
 
-    private final TradesDAO tradesDAO;
+    private final Downloader downloader;
+    private final Parser parser;
+    private final Updater updater;
 
-    public TradesJob(TradesDAO tradesDAO) {
-        this.tradesDAO = tradesDAO;
-    }
+    public TradesJob(Downloader downloader, Parser parser, Updater updater) {
+        this.downloader = downloader;
+        this.parser = parser;
+        this.updater = updater;
+    }    
 
     public void run() {
-        String filename = downloadTradesFileFromFTP();
-        Iterable<CSVRecord> tradeRecords = parse(filename);
-        updateTrades(tradeRecords);
-    }
-
-    public String downloadTradesFileFromFTP() {
-        FTPClient ftpClient = new FTPClient();
-        try {
-            ftpClient.connect("localhost", 8090);
-            ftpClient.login("foo", "password");
-            File tempFile = File.createTempFile("trades", "download");
-            OutputStream out = new FileOutputStream(tempFile);
-            ftpClient.retrieveFile("public/prod/trades.csv", out);
-            out.close();
-            return tempFile.getAbsolutePath();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Could not download the file");
-        }
-    }
-
-    private void updateTrades(Iterable<CSVRecord> trades) {
-        tradesDAO.deleteAll();
-        for (CSVRecord tradeRecord : trades) {
-            Trade trade = new Trade(tradeRecord.toMap());
-            tradesDAO.save(trade);
-        }
-    }
-
-    private Iterable<CSVRecord> parse(String filename) {
-        try {
-            Reader in = new FileReader(filename);
-            Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
-            return records;
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("There was an error while parsing CSV file");
-        }
+        String fileName = downloader.downloadFrom("public/prod/trades.csv");
+        Iterable<CSVRecord> tradeRecords = parser.parse(fileName);
+        updater.updateTrades(tradeRecords);
     }
 }
