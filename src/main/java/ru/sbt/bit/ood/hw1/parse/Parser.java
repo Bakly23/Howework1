@@ -11,6 +11,6 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author HPBrick
  */
-public interface Parser {
-    Iterable<CSVRecord> parse(String fileName);
+public interface Parser<T> {
+    Iterable<T> parse(String fileName);
 }

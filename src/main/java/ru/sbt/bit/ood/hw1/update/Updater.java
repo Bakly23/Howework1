@@ -11,6 +11,6 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author HPBrick
  */
-public interface Updater {
-    void updateTrades(Iterable<CSVRecord> trades);
+public interface Updater<T> {
+    void updateTrades(Iterable<T> trades);
 }

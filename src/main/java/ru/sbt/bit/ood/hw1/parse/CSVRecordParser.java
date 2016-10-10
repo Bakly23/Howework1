@@ -15,7 +15,7 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author HPBrick
  */
-public class CSVRecordParser implements Parser {
+public class CSVRecordParser implements Parser<CSVRecord> {
 
     public Iterable<CSVRecord> parse(String fileName) {
         try {

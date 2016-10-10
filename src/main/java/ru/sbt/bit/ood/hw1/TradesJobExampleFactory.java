@@ -7,7 +7,7 @@ package ru.sbt.bit.ood.hw1;
 
 import ru.sbt.bit.ood.hw1.download.FTPDownloader;
 import ru.sbt.bit.ood.hw1.parse.CSVRecordParser;
-import ru.sbt.bit.ood.hw1.update.UpdaterImpl;
+import ru.sbt.bit.ood.hw1.update.CSVUpdater;
 
 /**
  *
@@ -19,6 +19,6 @@ public class TradesJobExampleFactory {
     public static TradesJob getTradesJob() {
         return new TradesJob(new FTPDownloader("localhost", 8090, "foo", "password"), 
                 new CSVRecordParser(), 
-                new UpdaterImpl(new TradesDAO()));
+                new CSVUpdater(new TradesDAO()));
     }
 }
