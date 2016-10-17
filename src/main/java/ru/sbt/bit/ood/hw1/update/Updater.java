@@ -5,12 +5,10 @@
  */
 package ru.sbt.bit.ood.hw1.update;
 
-import org.apache.commons.csv.CSVRecord;
-
 /**
  *
  * @author HPBrick
  */
-public interface Updater<T> {
-    void updateTrades(Iterable<T> trades);
+public interface Updater<Trade> {
+    void updateTrades(Iterable<Trade> trades);
 }

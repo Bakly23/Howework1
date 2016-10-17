@@ -5,12 +5,10 @@
  */
 package ru.sbt.bit.ood.hw1.parse;
 
-import org.apache.commons.csv.CSVRecord;
-
 /**
  *
  * @author HPBrick
  */
-public interface Parser<T> {
-    Iterable<T> parse(String fileName);
+public interface Parser<Trade> {
+    Iterable<Trade> parse(String fileName);
 }

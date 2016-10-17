@@ -5,7 +5,6 @@
  */
 package ru.sbt.bit.ood.hw1.update;
 
-import org.apache.commons.csv.CSVRecord;
 import ru.sbt.bit.ood.hw1.Trade;
 import ru.sbt.bit.ood.hw1.TradesDAO;
 
@@ -13,18 +12,15 @@ import ru.sbt.bit.ood.hw1.TradesDAO;
  *
  * @author HPBrick
  */
-public class CSVUpdater implements Updater<CSVRecord> {
+public class CSVUpdater implements Updater<Trade> {
     private final TradesDAO tradesDAO;
 
     public CSVUpdater(TradesDAO tradesDao) {
         this.tradesDAO = tradesDao;
     }
     
-    public void updateTrades(Iterable<CSVRecord> trades) {
+    public void updateTrades(Iterable<Trade> trades) {
         tradesDAO.deleteAll();
-        for (CSVRecord tradeRecord : trades) {
-            Trade trade = new Trade(tradeRecord.toMap());
-            tradesDAO.save(trade);
-        }
+        trades.forEach((tradesDAO::save));
     }
 }
