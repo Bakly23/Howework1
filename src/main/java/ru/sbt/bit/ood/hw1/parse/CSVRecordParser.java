@@ -6,7 +6,8 @@
 package ru.sbt.bit.ood.hw1.parse;
 
 import org.apache.commons.csv.CSVFormat;
-import ru.sbt.bit.ood.hw1.Trade;
+import org.springframework.stereotype.Service;
+import ru.sbt.bit.ood.hw1.trade.Trade;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.Collection;
  *
  * @author HPBrick
  */
+@Service
 public class CSVRecordParser implements Parser<Trade> {
 
     public Iterable<Trade> parse(String fileName) {

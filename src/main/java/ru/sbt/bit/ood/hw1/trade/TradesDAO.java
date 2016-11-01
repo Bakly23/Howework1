@@ -1,7 +1,10 @@
-package ru.sbt.bit.ood.hw1;
+package ru.sbt.bit.ood.hw1.trade;
+
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
+@Service
 public class TradesDAO {
 
     public Collection<Trade> findAll() {

@@ -5,11 +5,12 @@
  */
 package ru.sbt.bit.ood.hw1.download;
 
+import org.apache.commons.net.ftp.FTPClient;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import org.apache.commons.net.ftp.FTPClient;
 
 /**
  *
@@ -29,8 +30,6 @@ public class FTPDownloader implements Downloader {
         this.password = password;
         ftpClient = new FTPClient();
     }
-    
-    
 
     public String downloadFrom(String path) {
         try {

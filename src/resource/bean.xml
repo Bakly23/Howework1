@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="ru.sbt.bit.ood.hw1"/>
+
+    <bean id="ftpDownloader" class="ru.sbt.bit.ood.hw1.download.FTPDownloader">
+        <constructor-arg index="0" value="localhost"/>
+        <constructor-arg index="1" value="8090"/>
+        <constructor-arg index="2" value="foo"/>
+        <constructor-arg index="3" value="password"/>
+    </bean>
+
+    <bean id="csvFtpJob" class="ru.sbt.bit.ood.hw1.trade.TradesJob">
+        <constructor-arg index="0" ref="ftpDownloader"/>
+        <constructor-arg index="1" ref="CSVRecordParser"/>
+        <constructor-arg index="2" ref="CSVUpdater"/>
+    </bean>
+</beans>

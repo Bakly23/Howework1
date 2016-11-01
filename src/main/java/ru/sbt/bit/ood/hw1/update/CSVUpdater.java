@@ -5,16 +5,20 @@
  */
 package ru.sbt.bit.ood.hw1.update;
 
-import ru.sbt.bit.ood.hw1.Trade;
-import ru.sbt.bit.ood.hw1.TradesDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.sbt.bit.ood.hw1.trade.Trade;
+import ru.sbt.bit.ood.hw1.trade.TradesDAO;
 
 /**
  *
  * @author HPBrick
  */
+@Service
 public class CSVUpdater implements Updater<Trade> {
     private final TradesDAO tradesDAO;
 
+    @Autowired
     public CSVUpdater(TradesDAO tradesDao) {
         this.tradesDAO = tradesDao;
     }

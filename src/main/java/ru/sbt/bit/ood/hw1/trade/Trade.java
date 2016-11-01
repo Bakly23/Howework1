@@ -1,4 +1,4 @@
-package ru.sbt.bit.ood.hw1;
+package ru.sbt.bit.ood.hw1.trade;
 
 import java.util.Map;
 
